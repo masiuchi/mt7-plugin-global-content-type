@@ -1,0 +1,35 @@
+name: GlobalContentType
+version: 0.02
+description: <__trans phrase="Enable to create content type in system scope.">
+plugin_link: https://github.com/masiuchi/mt7-plugin-global-content-type
+author_name: Masahiro IUCHI
+author_link: https://github.com/masiuchi
+
+applications:
+  cms:
+    callbacks:
+      cms_pre_load_filtered_list.content_type: $GlobalContentType::MT::Plugin::GlobalContentType::Callback::cms_pre_load_filtered_list
+      post_init: $GlobalContentType::MT::Plugin::GlobalContentType::Callback::post_init
+      template_param.edit_template: $GlobalContentType::MT::Plugin::GlobalContentType::Callback::tmpl_param_edit_template
+    menus:
+      content_type:manage_content_type:
+        view:
+          - system
+          - website
+          - blog
+      content_type:create_content_type:
+        view:
+          - system
+          - website
+          - blog
+
+callbacks:
+  init_app: $GlobalContentType::MT::Plugin::GlobalContentType::Callback::init_app
+
+listing_screens:
+  content_type:
+    view:
+      - system
+      - website
+      - blog
+
