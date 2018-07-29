@@ -137,7 +137,9 @@ sub _override_edit_content_data {
     *MT::CMS::ContentData::edit = sub {
         my ($app) = @_;
         my ($content_type_id)
-            = $app->param('type') =~ /^content_data_([0-9]+)$/;
+            = $app->param('content_type_id')
+            ? ( scalar $app->param('content_type_id') )
+            : $app->param('type') =~ /^content_data_([0-9]+)$/;
         my $content_type
             = $app->model('content_type')->load( $content_type_id || 0 );
         if ( $content_type && !$content_type->blog_id ) {
